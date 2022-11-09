@@ -36,7 +36,7 @@ struct Node {
 };
 */
 
-
+//  UNORDERED MAP time Complexity O(1)
 class Solution
 {
     public:
@@ -48,7 +48,7 @@ class Solution
      if ( head == NULL){
          return NULL ;
      }
-     map< int , bool > visited ;
+     unordered_map< int , bool > visited ;
      Node * curr = head ;
      Node * prev = NULL;
      while ( curr != NULL){
