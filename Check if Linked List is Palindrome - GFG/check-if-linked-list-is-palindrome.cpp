@@ -72,8 +72,9 @@ struct Node {
     
     
     
-    
-    
+// inline solution
+// t.c O(n)
+// s.c O(1)
 class Solution{    
    
    public:
