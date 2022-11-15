@@ -64,31 +64,10 @@ public:
     return anshead;
 }
     
-    ListNode* reverse(ListNode * head)
-    {
-        ListNode* prev = NULL;
-        ListNode* cur = head;
-        ListNode * fwd = NULL ;                                      
-        while ( cur != NULL)
-        {
-            fwd = cur -> next ;
-            cur -> next = prev ;
-            prev = cur ;
-            cur = fwd ;
-        
-        }
-    
-    return prev;
-    
-    } 
+//     
    ListNode* addTwoNumbers(ListNode* l1 , ListNode* l2){
         // code here
-        // l1  = reverse(l1);
-        // l2 = reverse(l2);
-       
         ListNode * ans = addition( l1 , l2 );
-        
-        // ans = reverse( ans );
         
         return ans;
     }
