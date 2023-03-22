@@ -92,32 +92,58 @@ struct Node
 }; */
 
 class Solution {
+    // public:
+    //   int height(struct Node* node){
+    //     // code here 
+    //         if(node == NULL){
+    //             return 0;
+    //         }
+        
+    //         int left = height(node-> left);
+    //         int right = height(node-> right);
+        
+    //         int ans = max(left,right)+ 1;
+        
+    //         return ans;
+    //     }
+    // // Function to return the diameter of a Binary Tree.
+    // int diameter(Node* root) {
+    //     // Your code here
+    //     if(root == NULL){
+    //         return 0;
+    //     }
+    //     int left = diameter(root->left);
+    //     int right = diameter(root->right);
+        
+    //     int main = height(root->left)+height(root->right)+1;
+    //     int ans = max(left, max(right,main));
+    //     return ans;
+    // }
   public:
-      int height(struct Node* node){
-        // code here 
-            if(node == NULL){
-                return 0;
-            }
-        
-            int left = height(node-> left);
-            int right = height(node-> right);
-        
-            int ans = max(left,right)+ 1;
-        
-            return ans;
+    pair<int , int > dfast(Node* root){
+        if(root == NULL){
+            pair<int,int> k = make_pair(0,0);
+            return k;
         }
+        pair<int,int> left = dfast(root->left);
+        pair<int,int> right = dfast(root->right);
+        int main = left.second+right.second+1;
+        
+        int leftans = left.first;
+        int rightans = right.first;
+        
+        pair<int,int> ans;
+        ans.first = max(leftans, max(rightans,main));
+        ans.second = max(left.second,right.second)+1;
+        
+        return ans;
+        
+    }
     // Function to return the diameter of a Binary Tree.
     int diameter(Node* root) {
         // Your code here
-        if(root == NULL){
-            return 0;
-        }
-        int left = diameter(root->left);
-        int right = diameter(root->right);
+        return dfast(root).first;
         
-        int main = height(root->left)+height(root->right)+1;
-        int ans = max(left, max(right,main));
-        return ans;
     }
 };
 
