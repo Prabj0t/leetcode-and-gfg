@@ -45,10 +45,10 @@ class Solution
         if( r1 == NULL && r2 == NULL){
             return 1;
         }
-        if( r1 == NULL && r2 != NULL){
+        else if( r1 == NULL && r2 != NULL){
             return 0;
         }
-        if( r1 != NULL && r2 == NULL){
+        else if( r1 != NULL && r2 == NULL){
             return 0;
         }
         
