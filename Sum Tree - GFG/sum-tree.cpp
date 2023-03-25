@@ -92,91 +92,91 @@ struct Node
 }; */
 
 // Should return true if tree is Sum Tree, else false
-class Solution
-{
-    public:
-    int sum( Node* root){
-        if ( root == NULL){
-            return 0 ;
-        }
-        int ans ;
-        int left = sum( root->left);
-        int right = sum( root->right);
-        if(root -> right == NULL && root ->left == NULL)
-        {
-             ans = root->data;
-        }
-        else {
-            if(root->data == left + right){
-                ans = root->data + left + right;
-            }
-            else {
-                ans = -1;
-            }
-        }
-        
-        return ans;
-    }
-    bool isSumTree(Node* root)
-    {
-         // Your code here
-        if( root == NULL){
-            return 1;
-        }
-        if( root -> right == NULL && root ->left == NULL ){
-            return 1;
-        }
-        
-        int left = sum(root->left );
-        if(left == -1){
-            return 0;
-        }
-        int right = sum(root->right);
-        
-        
-        if(root->data == left+right){
-            return 1;
-        }
-        else
-            return 0;
-    }
-};
-
 // class Solution
 // {
 //     public:
-    
-//     pair<bool,int> fans(Node * root){
-//         if(root == NULL ){
-//             pair<bool,int> p = make_pair(true,0);
-//             return p;
+//     int sum( Node* root){
+//         if ( root == NULL){
+//             return 0 ;
+//         }
+//         int ans ;
+//         int left = sum( root->left);
+//         int right = sum( root->right);
+//         if(root -> right == NULL && root ->left == NULL)
+//         {
+//              ans = root->data;
+//         }
+//         else {
+//             if(root->data == left + right){
+//                 ans = root->data + left + right;
+//             }
+//             else {
+//                 ans = -1;
+//             }
 //         }
         
-//         if( root -> right == NULL && root ->left == NULL ){
-//             pair<bool,int> p = make_pair(true,root->data);
-//             return p;
-//         }
-//         pair<bool,int> left = fans(root->left);
-//         pair<bool,int> right = fans(root->right);
-        
-//         bool leftans = left.first;
-//         bool rightans = right.first;
-        
-//         bool check = root->data == left.second + right.second;
-        
-//         pair<bool,int> ans;
-        
-//         if ( leftans && rightans && check ){
-//             ans.first = true;
-//             ans.second = root->data + left.second + right .second;
-//         }
 //         return ans;
-        
 //     }
-//     bool isSumTree(Node* root){
-//         return fans(root).first;
+//     bool isSumTree(Node* root)
+//     {
+//          // Your code here
+//         if( root == NULL){
+//             return 1;
+//         }
+//         if( root -> right == NULL && root ->left == NULL ){
+//             return 1;
+//         }
+        
+//         int left = sum(root->left );
+//         if(left == -1){
+//             return 0;
+//         }
+//         int right = sum(root->right);
+        
+        
+//         if(root->data == left+right){
+//             return 1;
+//         }
+//         else
+//             return 0;
 //     }
 // };
+
+class Solution
+{
+    public:
+    
+    pair<bool,int> fans(Node * root){
+        if(root == NULL ){
+            pair<bool,int> p = make_pair(true,0);
+            return p;
+        }
+        
+        if( root -> right == NULL && root ->left == NULL ){
+            pair<bool,int> p = make_pair(true,root->data);
+            return p;
+        }
+        pair<bool,int> left = fans(root->left);
+        pair<bool,int> right = fans(root->right);
+        
+        bool leftans = left.first;
+        bool rightans = right.first;
+        
+        bool check = root->data == left.second + right.second;
+        
+        pair<bool,int> ans;
+        
+        if ( leftans && rightans && check ){
+            ans.first = true;
+            ans.second = root->data + left.second + right .second;
+        }
+        return ans;
+        
+    }
+    bool isSumTree(Node* root){
+        return fans(root).first;
+    }
+};
 
 
 //{ Driver Code Starts.
