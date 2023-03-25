@@ -107,6 +107,7 @@ struct Node
 //              ans = root->data;
 //         }
 //         else {
+//  ------------- if at any step the is no sum subtree then return -1 -----------------
 //             if(root->data == left + right){
 //                 ans = root->data + left + right;
 //             }
@@ -128,6 +129,7 @@ struct Node
 //         }
         
 //         int left = sum(root->left );
+//   ------and check if ans == -1 return no Sum tree -----------------
 //         if(left == -1){
 //             return 0;
 //         }
