@@ -9,41 +9,8 @@ using namespace std;
 class Solution{
 public:	
 	vector<int> findSum(vector<int> &a, vector<int> &b) {
-// 	    // code here
-// 	int n = a.size();
-//     int m = b.size();
-    
-//     int carry = 0;
-//     vector<int> sum;
-    
-//     int i = n - 1;
-//     int j = m - 1;
-    
-//     while (i >= 0 || j >= 0 || carry > 0) {
-//             int digitA = 0;
-//             int digitB = 0;
-        
-//             if (i >= 0) {
-//                 digitA = a[i];
-//             }
-        
-//             if (j >= 0) {
-//                 digitB = b[j];
-//             }
-        
-//             int digitSum = digitA + digitB + carry;
-//             carry = digitSum / 10;
-//             digitSum = digitSum % 10;
-        
-//             sum.insert(sum.begin(), digitSum);
-        
-//             i--;
-//             j--;
-//         }
-    
-//         return sum;
-//     }
-int n = a.size();
+	    // code here
+	int n = a.size();
     int m = b.size();
     
     int carry = 0;
@@ -53,23 +20,29 @@ int n = a.size();
     int j = m - 1;
     
     while (i >= 0 || j >= 0 || carry > 0) {
-        int digitA = (i >= 0) ? a[i] : 0;
-        int digitB = (j >= 0) ? b[j] : 0;
+            int digitA = 0;
+            int digitB = 0;
         
-        int digitSum = digitA + digitB + carry;
-        carry = digitSum / 10;
-        digitSum = digitSum % 10;
+            if (i >= 0) {
+                digitA = a[i];
+            }
         
-        sum.push_back(digitSum);
+            if (j >= 0) {
+                digitB = b[j];
+            }
         
-        i--;
-        j--;
+            int digitSum = digitA + digitB + carry;
+            carry = digitSum / 10;
+            digitSum = digitSum % 10;
+            sum.push_back(digitSum);
+            i--;
+            j--;
+        }
+    
+        reverse(sum.begin(), sum.end());
+        return sum;
     }
-    
-    reverse(sum.begin(), sum.end());
-    
-    return sum;
-}
+
 };
 
 //{ Driver Code Starts.
