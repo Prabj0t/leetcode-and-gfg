@@ -18,5 +18,13 @@ public:
         }
         temp->val = frd->val;
         temp->next = NULL;
+        
+        // ListNode *nextNode = node->next;
+        // // Step 2
+        // node->val = nextNode->val;
+        // // Step 3
+        // node->next = nextNode->next;
+        // nextNode->next = nullptr;
+        // delete(nextNode);
     }
 };
