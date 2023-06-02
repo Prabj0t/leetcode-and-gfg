@@ -31,39 +31,22 @@ struct Node
 
 class Solution
 {
-    struct Node* solve(struct Node* head){
-        if( head == NULL || head->next == NULL){
-            return head;
-        }
-        
-        Node* nhead = solve(head->next);
-        head->next->next = head;
-        head->next = NULL;
-            
-        return nhead;
-    }
     public:
     //Function to reverse a linked list.
     struct Node* reverseList(struct Node *head)
     {
         // code here
         // return head of reversed list
-        
-        // iterative ...!!!
-        
-        // Node* prev = NULL;
-        // Node* curr = head;
-        // while(curr != NULL){
-        //     Node* temp = curr->next;
-        //     curr->next = prev;
-        //     curr = temp;
-        //     prev = curr;
-        // }
-        // return prev;
-        
-        // recursive !!!
-        return solve (head);
-        
+        Node * cur = head;
+        Node* next = NULL;
+        Node* prev = NULL;
+        while( cur != NULL){
+            next = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = next;
+        }
+    return prev;
     }
     
 };
