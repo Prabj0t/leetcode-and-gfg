@@ -35,5 +35,23 @@ public:
             k++;
         }
         return v;
+        
+        #include <unordered_set>
     }
 };
+//     int intersectionSize(int a[], int n, int b[], int m) {
+//          unordered_set<int> setA;
+//          int count = 0;
+    
+//          for (int i = 0; i < n; i++) {
+//              setA.insert(a[i]);
+//          }
+    
+//          for (int i = 0; i < m; i++) {
+//              if (setA.count(b[i])) {
+//              count++;
+//              setA.erase(b[i]); // If duplicates are allowed, remove this line
+//         }
+//     }
+//     return count;
+// }
