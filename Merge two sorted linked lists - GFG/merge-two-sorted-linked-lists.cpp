@@ -85,48 +85,48 @@ struct Node {
 Node* sortedMerge(Node* head1, Node* head2)  
 {  
     // code here
-    // Node* res = NULL;
+    Node* res = NULL;
     
-    // if( head1 == NULL){
-    //     return head2;
-    // }
-    // if( head2 == NULL){
-    //     return head1;
-    // }
+    if( head1 == NULL){
+        return head2;
+    }
+    if( head2 == NULL){
+        return head1;
+    }
     
-    // if( head1->data <= head2->data){
-    //     res = head1;
-    //     res->next = sortedMerge(head1->next , head2);
-    // }
+    if( head1->data <= head2->data){
+        res = head1;
+        res->next = sortedMerge(head1->next , head2);
+    }
     
-    // else{
-    //     res = head2;
-    //     res->next = sortedMerge(head1 , head2->next);
-    // }
-    // return res;
+    else{
+        res = head2;
+        res->next = sortedMerge(head1 , head2->next);
+    }
+    return res;
     
-        Node* temp = new Node(0);
-        Node* a = head1;
-        Node* res= temp;
-        Node* b = head2;
-        while(a != NULL && b != NULL){
-            if( a->data <= b->data){
-                res->next = a;
-                res = res->next;
-                a = a-> next;
-            }
-            else{
-                res->next = b;
-                res = res->next;
-                b = b->next;
-                }
-        }
-        if(a == NULL){
-            res->next = b;
-        }
-        if(b == NULL){
-            res->next = a;
-        }
-        res = temp->next;
-        return res;
+        // Node* temp = new Node(0);
+        // Node* a = head1;
+        // Node* res= temp;
+        // Node* b = head2;
+        // while(a != NULL && b != NULL){
+        //     if( a->data <= b->data){
+        //         res->next = a;
+        //         res = res->next;
+        //         a = a-> next;
+        //     }
+        //     else{
+        //         res->next = b;
+        //         res = res->next;
+        //         b = b->next;
+        //         }
+        // }
+        // if(a == NULL){
+        //     res->next = b;
+        // }
+        // if(b == NULL){
+        //     res->next = a;
+        // }
+        // res = temp->next;
+        // return res;
 }
