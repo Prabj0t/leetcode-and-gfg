@@ -11,15 +11,10 @@ public:
     void deleteNode(ListNode* node){
         ListNode* temp = node;
         ListNode* frd = temp->next;
-        if( frd != NULL){
             temp->val = frd->val;
             temp-> next = frd -> next;
             frd -> next = NULL;
-        }
-        else{
-            temp = NULL;
-
-        }
+        
                 // temp->next = NULL;
         
         // ListNode *nextNode = node->next;
