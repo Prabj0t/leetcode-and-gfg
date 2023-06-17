@@ -7,14 +7,13 @@ public:
         while( i < nums.size()){
             if( nums [i] == 1){
                 count++;
-                i++;
+                Max = max(count , Max);
             }
             else{
-                Max = max( Max, count);
                 count = 0;
-                i++;
             }
+            i++;
         }
-        return max(Max , count);
+        return Max;
     }
 };
