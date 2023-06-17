@@ -17,35 +17,28 @@ public:
         }
         
         ListNode* temp = head;
-        ListNode* prev = NULL;
         int size = 1;
         while(temp->next != NULL){
             temp = temp -> next;
             size++;
         }
-        
-        if(size < k)
-        {
-            k = k %  size;
+    
+        k = k %  size;
+        if( k == 0){
+            return head;
         }
-        int i = 1;
-        while(i <= k)
+        
+        int i = 0;
+        ListNode* tail = head;
+        while(i < size - k - 1)
         {
-            ListNode* temp = head;
-            ListNode* prev = NULL;
-
-            while(temp->next != NULL){
-                prev = temp; 
-                temp = temp -> next;
-            }
-
-                temp->next = head;
-                prev->next = NULL;
-                head = temp;
-                prev = NULL;
-                i++;
-            }
-        return head;
+            tail = tail -> next;
+            i++;
+        }
+        ListNode* newhead = tail -> next;
+        tail->next = NULL;
+        temp -> next = head;
+        return newhead;
     }
         
 };
