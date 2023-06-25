@@ -40,24 +40,33 @@ struct Node
 
 class Solution
 {
-    public:
-    //Function to return the level order traversal of a tree.
-    vector<int> levelOrder(Node* node)
+public:
+    // Function to return the level order traversal of a tree.
+    vector<int> levelOrder(Node *node)
     {
         vector<int> ans;
-        if(node == NULL){
+        if (node == NULL)
+        {
             return ans;
         }
+
         queue<Node*> q;
         q.push(node);
-        while(!q.empty()){
+        while (!q.empty())
+        {
             int size = q.size();
-            for (int i = 0 ; i < size ; i++){
+            for (int i = 0; i < q.size(); i++)
+            {
                 Node* temp = q.front();
-                q.pop(); 
-                if(temp->left != NULL) q.push(temp->left);
-                if(temp->right != NULL) q.push(temp->right);
-                
+                q.pop();
+                if (temp->left != NULL)
+                {
+                    q.push(temp->left);
+                }
+                if (temp->right != NULL)
+                {
+                    q.push(temp->right);
+                }
                 ans.push_back(temp->data);
             }
         }
