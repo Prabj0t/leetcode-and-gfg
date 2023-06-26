@@ -6,7 +6,7 @@ using namespace std;
 class Solution
 {
 public:
-void ans(vector<int> &arr, int i, vector<int> &temp, vector<int> &final, int sum ){
+void ans(vector<int> &arr, int i, vector<int> &final, int sum ){
 
   if( i == arr.size()){
     // int sum = 0;
@@ -18,10 +18,10 @@ void ans(vector<int> &arr, int i, vector<int> &temp, vector<int> &final, int sum
   }
 
 //   temp.push_back(arr[i]);
-  ans(arr , i+1 , temp, final , sum+arr[i]);
+  ans(arr , i+1 , final , sum+arr[i]);
 
 //   temp.pop_back();
-  ans(arr , i+1 , temp, final, sum);
+  ans(arr , i+1 , final, sum);
 }
 
 
@@ -29,10 +29,9 @@ void ans(vector<int> &arr, int i, vector<int> &temp, vector<int> &final, int sum
     {
         // Write Your Code here
         int i = 0;
-        vector<int> temp;
         vector<int> final;
         int sum = 0;
-        ans(arr, i, temp, final, sum);
+        ans(arr, i, final, sum);
         return final;
         
     }
