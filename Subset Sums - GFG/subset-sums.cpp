@@ -6,22 +6,22 @@ using namespace std;
 class Solution
 {
 public:
-void ans(vector<int> &arr, int i, vector<int> &temp, vector<int> &final ){
+void ans(vector<int> &arr, int i, vector<int> &temp, vector<int> &final, int sum ){
 
   if( i == arr.size()){
-    int sum = 0;
-    for ( int j = 0 ; j < temp.size() ; j++){
-      sum+=temp[j];
-    }
+    // int sum = 0;
+    // for ( int j = 0 ; j < temp.size() ; j++){
+    //   sum+=temp[j];
+    // }
 	final.push_back(sum);
 	return;
   }
 
-  temp.push_back(arr[i]);
-  ans(arr , i+1 , temp, final);
+//   temp.push_back(arr[i]);
+  ans(arr , i+1 , temp, final , sum+arr[i]);
 
-  temp.pop_back();
-  ans(arr , i+1 , temp, final);
+//   temp.pop_back();
+  ans(arr , i+1 , temp, final, sum);
 }
 
 
@@ -31,7 +31,8 @@ void ans(vector<int> &arr, int i, vector<int> &temp, vector<int> &final ){
         int i = 0;
         vector<int> temp;
         vector<int> final;
-        ans(arr, i, temp, final);
+        int sum = 0;
+        ans(arr, i, temp, final, sum);
         return final;
         
     }
