@@ -15,28 +15,26 @@ public:
         queue<TreeNode*> q;
         vector<double> ans;
         q.push(root);
-        q.push(NULL);
-        while(!q.empty()){
-            
+        // q.push(NULL);
+        while(!q.empty() ){
+            int s = q.size();
             double sum = 0;
-            int cnt = 0;
-            while(q.front() != NULL){
+            for(int i = 0 ; i < s ; i++){
                 TreeNode* n = q.front();
                 sum += n->val;
-                cnt++;
                 q.pop();
-                
                 
                 if(n->left) q.push(n->left);
                 if(n->right) q.push(n->right);
+                
             }
-            q.pop();
-            double avg = sum/cnt;
+            // q.pop();
+            double avg = sum/s;
             ans.push_back(avg);
-            if(q.empty()){
-                return ans;
-            }
-            q.push(NULL);   
+            // if(q.empty()){
+            //     return ans;
+            // }
+            // q.push(NULL);   
         }
         return ans;
     }
