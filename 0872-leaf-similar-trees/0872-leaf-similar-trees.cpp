@@ -25,6 +25,8 @@ public:
         dfs(root->right , v);
     }
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+        
+        
         vector<int> v1;
         dfs(root1 , v1);
         
@@ -43,6 +45,5 @@ public:
             j++;
         }
         return 1;
-        
     }
 };
