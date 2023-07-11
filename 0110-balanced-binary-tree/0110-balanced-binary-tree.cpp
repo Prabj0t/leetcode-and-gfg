@@ -24,7 +24,8 @@ public:
         
         pair<int,bool> ans;
         ans.first = max(lefth.first , righth.first) + 1; 
-        if( abs(lefth.first - righth.first) > 1 || !lefth.second || !righth.second){
+        
+        if( abs(lefth.first - righth.first) > 1 || !lefth.second || !righth.second) /*important conditions*/ {
             ans.second = false;
         }
         else{
