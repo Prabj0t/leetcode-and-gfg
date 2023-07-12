@@ -12,6 +12,7 @@ public:
         for(int j = 0 ; j <= nums.size() ; j++){
             if(mp[j] == 0){
                 ans = j;
+                break;
             }
         }
         
