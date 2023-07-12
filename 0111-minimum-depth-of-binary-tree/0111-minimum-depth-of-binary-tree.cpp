@@ -24,16 +24,13 @@ public:
             int n = q.size();
             for(int i = 0 ; i < n; i++){
                 TreeNode* a = q.front();
-                
-                if(a->left) q.push(a->left);
-                if(a->right) q.push(a->right);
                 q.pop();
                 
                 if(a->left == NULL && a->right == NULL){
                     return mindepth;
                 }
-                
-                
+                if(a->left) q.push(a->left);
+                if(a->right) q.push(a->right);                
                 
             }
            
