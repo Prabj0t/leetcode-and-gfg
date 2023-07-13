@@ -126,42 +126,49 @@ class Solution
 {
 public:
     bool flag = true;
-    void inorder(Node* root , Node* &prev , Node* &newroot){
-        
-        if(root == NULL){
+    
+    // Inorder traversal to populate the "next" pointers
+    void inorder(Node* root, Node*& prev, Node*& newroot) {
+        if (root == nullptr) {
             return;
         }
         
-        inorder(root->left , prev , newroot);
-        if(flag == true){
+        inorder(root->left, prev, newroot);
+        
+        // Assign the first encountered node as the new root
+        if (flag) {
             newroot = root;
             flag = false;
         }
         
+        // Update the "next" pointer of the previous node
         if (prev != nullptr) {
             prev->next = root;
         }
         prev = root;
-        inorder(root->right , prev, newroot);
         
+        inorder(root->right, prev, newroot);
     }
-    void populateNext(Node *root)
-    {
-        //code here
-        if(root == NULL){
+    
+    // Function to populate the "next" pointers of the tree
+    void populateNext(Node*& root) {
+        if (root == nullptr) {
             return;
         }
-        Node* prev = NULL;
-        Node* newroot = NULL;
-        inorder(root , prev , newroot);
+        
+        Node* prev = nullptr;
+        Node* newroot = nullptr;
+        
+        inorder(root, prev, newroot);
         
         // this two should not be null because then how the tree traverse and print answer
         // prev ->left = NULL ;
         // prev ->right = NULL ;
-        prev ->next = NULL ;
-        // if (prev != nullptr) {
-        //     prev->next = nullptr;
-        // }
+        // Set the "next" pointer of the last node to nullptr
+        if (prev != nullptr) {
+            prev->next = nullptr;
+        }
+        
         root = newroot;
     }
 };
