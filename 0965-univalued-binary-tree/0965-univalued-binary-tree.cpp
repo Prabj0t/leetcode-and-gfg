@@ -12,24 +12,25 @@
 class Solution {
 public:
     bool ans = true;
-    void dfs(TreeNode* root, int key){
+    bool dfs(TreeNode* root, int key){
         if(root == NULL){
-            return;
+            return true;
         }
         if(root->val != key){
-            ans = false;
-            return;
+            return false;
         }
-        dfs(root->left ,  key);
-        dfs(root->right,  key);
+        if(dfs(root->left ,  key) == false){
+            return false;
+        }
+        if(dfs(root->right,  key) == false){
+            return false ;  
+        }
         
-        return ;
+        return true;
     }
     bool isUnivalTree(TreeNode* root) {
         
         int key = root->val;
-        
-        dfs(root, key );
-        return ans;
+        return dfs(root, key );
     }
 };
