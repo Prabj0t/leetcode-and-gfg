@@ -128,46 +128,44 @@ struct Node
  */
 
 //Function to return a list containing elements of left view of the binary tree.
-vector<int> leftView(Node *root)
-{
+vector<int> leftView(Node *root) {
     vector<int> ans;
-       
-        // Check if the tree is empty
-        if (root == NULL) {
-            return ans;
-        }
-    
-        queue<pair<int , pair<Node*, int> > > q;
-    
-        map<int, pair<int, bool>> mp;  
-        q.push(make_pair(0 , make_pair(root, 0)));
-    
-        // Perform level order traversal
-        while (!q.empty()) {
-            pair<int , pair<Node*, int>> temp = q.front();
-            q.pop();
-    
-            Node* cur = temp.second.first;
-            int hd = temp.second.second;
-            int lvl = temp.first;
-            
-            if (!mp[lvl].second) {
-                mp[lvl].first = temp.second.first->data;
-                mp[lvl].second = true;
-            }
-    
-            if (temp.second.first->left) {
-                q.push(make_pair(lvl + 1, make_pair(temp.second.first->left, hd - 1)));
-            }
-    
-            if (temp.second.first->right) {
-                q.push(make_pair(lvl + 1, make_pair(temp.second.first->right, hd + 1)));
-            }
-        }
-    
-        for (auto i : mp) {
-            ans.push_back(i.second.first);
-        }
-    
+
+    // Check if the tree is empty
+    if (root == NULL) {
         return ans;
+    }
+
+    queue<pair<Node*, int>> q; // Queue to perform BFS
+    map<int, pair<int, bool>> mp; // Map to store leftmost node at each level
+    q.push(make_pair(root, 0)); // Push root node with level 0 to the queue
+
+    // Perform level order traversal
+    while (!q.empty()) {
+        pair<Node*, int> temp = q.front();
+        q.pop();
+
+        Node* cur = temp.first; // Current node
+        int lvl = temp.second; // Level of the current node
+
+        if (!mp[lvl].second) {
+            mp[lvl].first = temp.first->data; // Store the leftmost node at each level
+            mp[lvl].second = true; // Mark the level as visited
+        }
+
+        if (temp.first->left) {
+            q.push(make_pair(temp.first->left, lvl + 1)); // Push left child with increased level
+        }
+
+        if (temp.first->right) {
+            q.push(make_pair(temp.first->right, lvl + 1)); // Push right child with increased level
+        }
+    }
+
+    // Traverse the map and add leftmost nodes to the result vector
+    for (auto i : mp) {
+        ans.push_back(i.second.first);
+    }
+
+    return ans;
 }
