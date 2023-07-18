@@ -117,38 +117,50 @@ struct Node
 class Solution
 {
 public:
-    void rec(Node* root , pair<int, int> &ans , pair<int, int> &temp){
-        if(root == NULL ){
-            if( temp.second > ans.second ){
-                ans.second = temp.second;
-                ans.first = temp.first;
-            }
-            else if(temp.second == ans.second){
-                ans.first = max(ans.first , temp.first);
-            }
-            return; 
+    void rec(Node* root, pair<int, int>& ans, pair<int, int>& temp) {
+    // Base case: If the current node is NULL (leaf node reached)
+    if (root == NULL) {
+        // Check if the path from root to leaf is longer than the current longest path
+        if (temp.second > ans.second) {
+            ans.second = temp.second;
+            ans.first = temp.first;
         }
-         
-        temp.first += root->data;
-        temp.second += 1; 
-        rec( root -> left , ans , temp);
-        
-        rec( root -> right , ans , temp);
-        temp.second -= 1; 
-        temp.first -= root->data;
-        
+        // If the path length is the same, update the maximum sum
+        else if (temp.second == ans.second) {
+            ans.first = max(ans.first, temp.first);
+        }
         return;
-        
     }
-    int sumOfLongRootToLeafPath(Node *root)
-    {
-        //code here
-        pair<int, int > ans = make_pair(0 , 0);
-        pair<int, int > temp = make_pair(0 , 0);
-        rec(root , ans , temp);
-        
-        return ans.first;
-    }
+    
+    // Add the current node's data to the running sum and increment the path length
+    temp.first += root->data;
+    temp.second += 1;
+
+    // Recursively traverse the left subtree
+    rec(root->left, ans, temp);
+
+    // Recursively traverse the right subtree
+    rec(root->right, ans, temp);
+
+    // Decrement the path length and subtract the current node's data from the running sum
+    temp.second -= 1;
+    temp.first -= root->data;
+
+    return;
+}
+
+int sumOfLongRootToLeafPath(Node* root) {
+    // Initialize the answer and temporary variables
+    pair<int, int> ans = make_pair(0, 0);
+    pair<int, int> temp = make_pair(0, 0);
+
+    // Call the recursive function
+    rec(root, ans, temp);
+
+    // Return the maximum sum of the longest root-to-leaf path
+    return ans.first;
+}
+
 };
 
 //{ Driver Code Starts.
