@@ -25,9 +25,9 @@ public:
             return NULL;
         }
         int element = postorder[index--];
-        if(element == INT_MIN){
-            return NULL;
-        }
+        // if(element == INT_MIN){
+        //     return NULL;
+        // }
         TreeNode *root = new TreeNode(element);
 
         int position = mapp[element];
