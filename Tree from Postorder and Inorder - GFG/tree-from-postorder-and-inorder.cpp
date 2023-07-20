@@ -66,43 +66,31 @@ struct Node
 
 //Function to return a tree created from postorder and inoreder traversals.
 
-    // void creatmap(int in[] , map<int, int > &mapp , int n ){
-    //     for( int i = 0 ; i < n ; i++){
-    //         // store index of every element on the index=element in mapp 
-    //         mapp[in[i]] = i;
-    //     }
-    // }
+Node* solve(int in[], int post[], int n, int& postIndex, int inorderStart, int inorderEnd) {
+        if (postIndex < 0 || inorderStart > inorderEnd) {
+            return nullptr;
+        }
     
-Node* Solve(int in[] , int post[],  int instart , int inend, int &index  , map<int,int> &mapp ,int n ){
-    // base case 
-    if(index < 0 || instart > inend ){
-    return NULL;
-        
+        int element = post[postIndex--];
+        Node* root = new Node(element);
+    
+        int position = -1;
+        for (int i = inorderStart; i <= inorderEnd; i++) {
+            if (in[i] == element) {
+                position = i;
+                break;
+            }
+        }
+    
+        root->right = solve(in, post, n, postIndex, position + 1, inorderEnd);
+        root->left = solve(in, post, n, postIndex, inorderStart, position - 1);
+    
+        return root;
     }
-    // start from first element of preorder which is our root according NLR rule
-    int element = post[index--];
-    Node* root = new Node(element);
-    int position = mapp[element];
-    // reccirsive calls 
-        
-    root->right = Solve(in , post,  position + 1 ,inend , index , mapp, n);
-    root->left = Solve(in , post , instart , position - 1 , index , mapp, n);
+    
+Node *buildTree(int in[], int post[], int n) {
+    // Your code here
+    int postIndex = n-1;
+    Node* root = solve(in, post, n, postIndex, 0, n - 1);
     return root;
 }
-Node* buildTree(int in[],int post[], int n)
-{
-    map<int,int> nodetoindex;
-    // creat Nodes to index mapping
-    // creatmap(in , nodetoindex , n);
-    for(int i = 0 ; i < n ; i++){
-        // store index of every element on the index=element in mapp 
-       nodetoindex[in[i]] = i;
-    }
-    int postorderIndex = n-1;
-    Node* ans = Solve(in , post  , 0 , n-1,  postorderIndex ,nodetoindex, n);
-    return ans;
-        // Code here
-}
-// Node *buildTree(int in[], int post[], int n) {
-//     // Your code here
-// }
