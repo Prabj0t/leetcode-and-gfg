@@ -67,30 +67,40 @@ struct Node
 //Function to return a tree created from postorder and inoreder traversals.
 
 Node* solve(int in[], int post[], int n, int& postIndex, int inorderStart, int inorderEnd) {
-        if (postIndex < 0 || inorderStart > inorderEnd) {
-            return nullptr;
-        }
-    
-        int element = post[postIndex--];
-        Node* root = new Node(element);
-    
-        int position = -1;
-        for (int i = inorderStart; i <= inorderEnd; i++) {
-            if (in[i] == element) {
-                position = i;
-                break;
-            }
-        }
-    
-        root->right = solve(in, post, n, postIndex, position + 1, inorderEnd);
-        root->left = solve(in, post, n, postIndex, inorderStart, position - 1);
-    
-        return root;
+    // Base case: If postIndex is less than 0 or inorderStart is greater than inorderEnd, return nullptr
+    if (postIndex < 0 || inorderStart > inorderEnd) {
+        return nullptr;
     }
+
+    // Current element is the last element in the postorder traversal
+    int element = post[postIndex--];
+    Node* root = new Node(element);
+
+    // Find the position of the current element in the inorder array
+    int position = -1;
+    for (int i = inorderStart; i <= inorderEnd; i++) {
+        if (in[i] == element) {
+            position = i;
+            break;
+        }
+    }
+
+    // Recursively construct the right subtree (since the right child comes before the left child in postorder)
+    root->right = solve(in, post, n, postIndex, position + 1, inorderEnd);
     
-Node *buildTree(int in[], int post[], int n) {
-    // Your code here
-    int postIndex = n-1;
-    Node* root = solve(in, post, n, postIndex, 0, n - 1);
+    // Recursively construct the left subtree (since the left child comes after the right child in postorder)
+    root->left = solve(in, post, n, postIndex, inorderStart, position - 1);
+
     return root;
 }
+
+Node *buildTree(int in[], int post[], int n) {
+    // Initialize the postIndex to the last index of post array
+    int postIndex = n - 1;
+
+    // Call the recursive function to build the binary tree
+    Node* root = solve(in, post, n, postIndex, 0, n - 1);
+
+    return root;
+}
+
