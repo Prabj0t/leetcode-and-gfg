@@ -101,7 +101,8 @@ class Solution
     public:
     void flatten(Node *root)
     {
-        //code here?
+        //code here
+        // morris traversal
         Node* curr = root;
         Node* prev = NULL;
         while( curr != NULL){
