@@ -17,15 +17,13 @@ public:
 
         // Step 3: Read in next characters until the next non-digit character or end of input.
         int result = 0;
-        while (i < n && isdigit(s[i])) {
-            int digit = s[i] - '0';
-
+        while (i < n && '0' <= s[i] && s[i] <= '9') {
+            
             // Step 5: Check for overflow before updating the result.
-            if (result > (INT_MAX - digit) / 10) {
+            if(result > (INT_MAX / 10) || (result == (INT_MAX / 10) && s[i] - '0' > 7)){
                 return neg ? INT_MIN : INT_MAX;
             }
-
-            result = result * 10 + digit;
+            result = result * 10 + (s[i] - '0');
             i++;
         }
 
