@@ -20,10 +20,7 @@ public:
             v.push_back(s);
         }
 
-        int val = root->val;
-        string str_val = to_string(val);
-
-        s = s + str_val + "->" ; // Create a new string for each recursive call
+        s = s + to_string(root->val) + "->" ; // Create a new string for each recursive call
 
         solve(root->left, v, s);
         solve(root->right, v, s);
