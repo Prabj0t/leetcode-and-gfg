@@ -1,6 +1,7 @@
 class Solution
 {
 public:
+    // revice krna hai 
     string addBinary(string a, string b)
     {
         string s = "";
