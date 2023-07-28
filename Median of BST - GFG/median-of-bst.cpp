@@ -123,30 +123,35 @@ struct Node {
 // your task is to complete the Function
 // Function should return median of the BST
 
-void inorder(struct Node* root , vector<float> &inn){
-     if( root == NULL){
-         return;
-     }
-     
-     inorder(root->left , inn);
-     inn.push_back(root->data);
-     inorder(root->right , inn);
-     return;
+// In-order traversal to store node values in the vector 'inn'.
+void inorder(struct Node* root, vector<float> &inn) {
+    if (root == NULL) {
+        return; // Base case: Return when reaching the end of the tree.
+    }
+
+    inorder(root->left, inn); // Traverse left subtree.
+    inn.push_back(root->data); // Store the current node value in 'inn'.
+    inorder(root->right, inn); // Traverse right subtree.
+    return; // End of the function.
 }
-float findMedian(struct Node *root)
-{
-      //Code here
-      float ans;
-      vector<float> inn;
-      inorder(root , inn);
-      int n = inn.size();
-      
-      if( n % 2 == 0){
-          ans = (inn[n/2] + inn[n/2 - 1])/2;
-      }
-      else{
-          ans = inn[n/2];
-      }
-    return ans;
+
+// Function to find the median of the values in the binary search tree.
+float findMedian(struct Node *root) {
+    //Code here
+    float ans; // Variable to store the median.
+    vector<float> inn; // Vector to store node values in sorted order.
+    inorder(root, inn); // Perform in-order traversal to populate 'inn' with node values.
+    int n = inn.size(); // Get the size of the vector.
+
+    if (n % 2 == 0) {
+        // If the number of elements is even, take the average of the two middle elements.
+        ans = (inn[n / 2] + inn[n / 2 - 1]) / 2;
+    } else {
+        // If the number of elements is odd, take the middle element as the median.
+        ans = inn[n / 2];
+    }
+
+    return ans; // Return the calculated median.
 }
+
 
