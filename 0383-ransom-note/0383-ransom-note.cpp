@@ -9,16 +9,23 @@ public:
         }
         
         for(auto ch : magazine){
-            mp2[ch]++;
+            if(mp1[ch]){
+                mp1[ch]--;
+            }
         }
+        
+//         for(auto ch : ransomNote){
+//             if(mp2[ch] < mp1[ch]){
+//                 return 0;
+//             }
+            
+//         } 
         
         for(auto ch : ransomNote){
-            if(mp2[ch] < mp1[ch]){
+            if(mp1[ch]){
                 return 0;
             }
-            
         }
-        
         return 1;
     }
 };
