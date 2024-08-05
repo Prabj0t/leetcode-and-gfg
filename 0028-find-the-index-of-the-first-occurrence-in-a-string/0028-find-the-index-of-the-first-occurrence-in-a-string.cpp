@@ -1,33 +1,28 @@
 class Solution {
 public:
     int strStr(string haystack, string needle) {
-        int i = 0 ;
-        int j = 0;
-        int ans = -1;
-        while(i < haystack.size() && j < needle.size()){
-            if(haystack[i] == needle[j]){
-                if(ans == -1){
-                    ans = i;
-                }
-                i++;
-                j++;
+        // Edge case: if needle is an empty string, return 0
+        if (needle.empty()) return 0;
+
+        int haystackLen = haystack.size();
+        int needleLen = needle.size();
+        
+        // Loop through the haystack
+        for (int i = 0; i <= haystackLen - needleLen; ++i) {
+            int j = 0;
+            
+            // Check if the substring matches the needle
+            while (j < needleLen && haystack[i + j] == needle[j]) {
+                ++j;
             }
-            else{
-                if(j == 0){
-                    i++;
-                }
-                else{
-                    j = 0;
-                    i = ans+1;
-                    ans = -1;
-                }
+            
+            // If the entire needle is found, return the starting index
+            if (j == needleLen) {
+                return i;
             }
         }
-        if(j != needle.size()){
-            return -1;
-        }
-        else{
-            return ans;
-        }
-    }     
+        
+        // If needle is not found in the haystack, return -1
+        return -1;
+    }
 };
