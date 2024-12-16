@@ -1,75 +1,81 @@
 class Solution {
 public:
-    vector<int> NSL(vector<int>& heights){
-        vector<int> ans;
-        stack<pair<int,int>> s;
+    // Function to find Nearest Smaller to Left (NSL)
+    vector<int> NSL(vector<int>& heights) {
+        vector<int> ans;               // Stores indices of NSL
+        stack<pair<int, int>> s;       // Stack to store pairs of (height, index)
         
-        for(int i = 0 ; i < heights.size() ; i++){
-            if(s.empty()){
-                ans.push_back(-1);
+        for (int i = 0; i < heights.size(); i++) {
+            // Case 1: Stack is empty, no smaller element to the left
+            if (s.empty()) {
+                ans.push_back(-1);     // Push -1 as there is no smaller element
             }
-            else if( heights[i] >= s.top().first){
-                ans.push_back(s.top().second);
+            // Case 2: Top of stack is smaller than or equal to the current element
+            else if (heights[i] >= s.top().first) {
+                ans.push_back(s.top().second); // Index of the smaller element
             }
-            else if(heights[i] < s.top().first){
-                while(!s.empty() && heights[i] < s.top().first){
-                    s.pop();
+            // Case 3: Top of stack is greater, find the nearest smaller element
+            else {
+                while (!s.empty() && heights[i] < s.top().first) {
+                    s.pop(); // Pop elements greater than the current height
                 }
-                if(s.empty()){
-                    ans.push_back(-1);
-                }
-                else {
-                    ans.push_back(s.top().second);
+                if (s.empty()) {
+                    ans.push_back(-1); // No smaller element found
+                } else {
+                    ans.push_back(s.top().second); // Index of the smaller element
                 }
             }
-             s.push({heights[i], i});
+            // Push current element and its index to the stack
+            s.push({heights[i], i});
         }
-        
         return ans;
     }
-    
-    vector<int> NSR(vector<int>& heights){
-        vector<int> ans;
-        stack<pair<int,int>> s;
-        
-        for(int i = heights.size() - 1 ; i >= 0 ; i--){
-            if(s.empty()){
-                ans.push_back(heights.size()); // NSR boundary is the size of the array
+
+    // Function to find Nearest Smaller to Right (NSR)
+    vector<int> NSR(vector<int>& heights) {
+        vector<int> ans;               // Stores indices of NSR
+        stack<pair<int, int>> s;       // Stack to store pairs of (height, index)
+
+        for (int i = heights.size() - 1; i >= 0; i--) {
+            // Case 1: Stack is empty, no smaller element to the right
+            if (s.empty()) {
+                ans.push_back(heights.size()); // Push array size as the boundary
             }
-            else if( heights[i] > s.top().first){
-                ans.push_back(s.top().second);
+            // Case 2: Top of stack is smaller than the current element
+            else if (heights[i] > s.top().first) {
+                ans.push_back(s.top().second); // Index of the smaller element
             }
-            else if(heights[i] <= s.top().first){
-                while(!s.empty() && heights[i] <= s.top().first){
-                    s.pop();
+            // Case 3: Top of stack is greater, find the nearest smaller element
+            else {
+                while (!s.empty() && heights[i] <= s.top().first) {
+                    s.pop(); // Pop elements greater than or equal to the current height
                 }
-                if(s.empty()){
-                    ans.push_back(heights.size());
-                }
-                else {
-                    ans.push_back(s.top().second);
+                if (s.empty()) {
+                    ans.push_back(heights.size()); // No smaller element found
+                } else {
+                    ans.push_back(s.top().second); // Index of the smaller element
                 }
             }
-            s.push({heights[i], i}); // Push as a pair
-            
+            // Push current element and its index to the stack
+            s.push({heights[i], i});
         }
-        reverse(ans.begin(), ans.end());
+        reverse(ans.begin(), ans.end()); // Reverse the result for correct order
         return ans;
     }
-    
+
+    // Function to calculate the largest rectangle area in the histogram
     int largestRectangleArea(vector<int>& heights) {
-        vector<int> Nsl = NSL(heights);
-        vector<int> Nsr = NSR(heights);
-        
-        int maxArea = INT_MIN;
-        
-        for(int i = 0 ; i < heights.size(); i++){
-            int width = Nsr[i] - Nsl[i] - 1; // calculate the width
-            int Area = width*heights[i]; //calculate area
-            maxArea = max(maxArea , Area);
+        vector<int> Nsl = NSL(heights); // Indices of Nearest Smaller to Left
+        vector<int> Nsr = NSR(heights); // Indices of Nearest Smaller to Right
+
+        int maxArea = INT_MIN; // Initialize max area to the smallest possible value
+
+        // Calculate the area for each bar in the histogram
+        for (int i = 0; i < heights.size(); i++) {
+            int width = Nsr[i] - Nsl[i] - 1; // Width of the rectangle
+            int area = width * heights[i];  // Area = height * width
+            maxArea = max(maxArea, area);   // Update max area if current area is larger
         }
-        
-        
         return maxArea;
     }
 };
