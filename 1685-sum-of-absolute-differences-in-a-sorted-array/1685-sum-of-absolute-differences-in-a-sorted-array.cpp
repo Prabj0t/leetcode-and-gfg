@@ -1,28 +1,40 @@
 class Solution {
 public:
     vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
-        int totalSum = 0 , prefixSum = 0;
+        int totalSum = 0, prefixSum = 0;
         int n = nums.size();
-        vector<int> ans(n ,0);
+        vector<int> ans(n, 0); // Initialize the answer vector with zeros
         
-        for(int num : nums){
-            totalSum += num;
+        // Calculate the total sum of the array
+        for (int num : nums) {
+            totalSum += num; // Add each element to totalSum
         }
         
-        for(int i = 0 ; i < nums.size() ; i++){
+        // Iterate through the array to compute the result for each element
+        for (int i = 0; i < nums.size(); i++) {
             
-            int leftContribution = abs(prefixSum - i*nums[i]);
-            int rightContribution = (totalSum - prefixSum - nums[i]) - (n - i - 1)*nums[i];
+            // Contribution of all elements to the left of nums[i]
+            // Formula: abs(prefixSum - i * nums[i])
+            int leftContribution = abs(prefixSum - i * nums[i]);
             
+            // Contribution of all elements to the right of nums[i]
+            // Formula: (totalSum - prefixSum - nums[i]) - (n - i - 1) * nums[i]
+            int rightContribution = (totalSum - prefixSum - nums[i]) - (n - i - 1) * nums[i];
+            
+            // Calculate the sum of contributions from both sides
             int sum = leftContribution + rightContribution;
             
+            // Store the result for the current index
             ans[i] = sum;
+            
+            // Update the prefix sum to include nums[i]
             prefixSum += nums[i];
         }
         
-        return ans;
+        return ans; // Return the result vector
     }
 };
+
 
 
 // class Solution {
