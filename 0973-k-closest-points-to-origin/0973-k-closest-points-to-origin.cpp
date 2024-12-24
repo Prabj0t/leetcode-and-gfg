@@ -1,30 +1,21 @@
 class Solution {
 public:
     int distanceCalculate(int a, int b){
-        int ans;
-        ans = a*a + b*b;
-        
-        return ans;
+        return a*a + b*b;
     }
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
-        unordered_map<int,int> umap;
-        
-        
-        for(int i = 0 ; i < points.size() ; i++){
-            int distance = distanceCalculate(points[i][0], points[i][1]);
-            umap[i] = distance;
-        }
-        
         priority_queue<pair<int, int>> pq ;
         
-        for(auto it : umap){
+        for(int i = 0 ; i < points.size() ; i++){
             
-            pq.push({it.second , it.first});
+            int distance = distanceCalculate(points[i][0], points[i][1]);
+            
+            pq.push({distance , i});
+            
             if(pq.size() > k){
                 pq.pop();
             }
         }
-        
         
         vector<vector<int>> finalAns;
         
